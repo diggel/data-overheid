@@ -1,9 +1,16 @@
 <html>
 	<head>
-		<script src="bower_components/platform/platform.js"></script>
+		<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.17/firebase.js'></script>
 	</head>
 	<body>
 		<p>Sandbox page</p>
-		<cth-gov-stats></cth-gov-stats>
+		<script>
+			var dataUrl = "https://pilotcthdata.firebaseio.com/";
+			var testUrl = "https://popping-fire-9951.firebaseio.com/";
+			var linkRef = new Firebase(dataUrl + "dataoverheidnl/26-05-14/links");
+			var dataRef = new Firebase(dataUrl + "dataoverheidnl/26-05-14/datasets");
+			var resourceRef = new Firebase(dataUrl + "dataoverheidnl/26-05-14/datasets/000b1208-433f-4a12-a60c-f2e092815ec6");
+		</script>
+
 	</body>
 </html>

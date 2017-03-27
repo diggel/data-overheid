@@ -1,14 +1,18 @@
 var Firebase = require('firebase');
 var dataUrl = "https://cth-data-overheid-rj.firebaseio.com/";
-var fireRef = new Firebase("https://pilotcthdata.firebaseio.com/dataoverheidnl/26-05-14/");
+// var fireRef = new Firebase("https://pilotcthdata.firebaseio.com/dataoverheidnl/26-05-14/");
 var datasetRef = new Firebase("https://cth-data-overheid-rj.firebaseio.com/rows");
+// var linksRef = new Firebase ("https://pilotcthdata.firebaseio.com/dataoverheidnl/26-05-14/links");
+// var resourcesRef = new Firebase("https://pilotcthdata.firebaseio.com/dataoverheidnl/26-05-14/datasets/000b1208-433f-4a12-a60c-f2e092815ec6/resources");
 
 
 
 var query = datasetRef;
+// var query = linksRef
 var urls = [];
 var tagIndex = {};
 var result = [];
+var buckettransportation = [];
 
 query.on('value', function(snapshot) {
   result = snapshot.val();
@@ -36,7 +40,7 @@ query.on('value', function(snapshot) {
   		var count = {total: 0, working: 0, semiWorking: 0, notWorking: 0};
 
   		for (var j in theone.statuscode){
-  		
+  			// console.log(theone.statuscode[j]);
 
 	  		if (theone.statuscode[j] == 200){
 	  			count.working ++;
@@ -57,13 +61,13 @@ query.on('value', function(snapshot) {
   	};
   	
   	var concepts = [];
-  	var chosenconcepts = ["veiligheid","begroting","transport","health","environment","society"];
-  	var chosenconceptstranslated = ["security","wealth","transport","health","nature","family"];
+  	var chosenconcepts = ["begroting","health","transport","environment","society","veiligheid"];
+  	var chosenconceptstranslated = ["wealth","health","transport","nature","family","security"];
 
   	for (var i = 0; i < chosenconcepts.length; i++){
   		
   		var temp = statuscounter(tagIndex[chosenconcepts[i]]);
-  		temp.name = chosenconceptstranslated[i];
+  		temp.concept = chosenconceptstranslated[i];
   		concepts.push(temp);
 
   	}
